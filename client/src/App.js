@@ -9,7 +9,8 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-      const socket = io('ws://localhost:8000', { transports: ['websocket'] });
+      const socketURL = `ws://${window.location.hostname}:${process.env.PORT || 8000}`;
+      const socket = io(socketURL, { transports: ['websocket'] });
       setSocket(socket);
         socket.on('updateData', ( tasks ) => {
             updateData( tasks );
